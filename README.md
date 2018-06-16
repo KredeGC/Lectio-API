@@ -8,9 +8,11 @@ Selve API'et fungerer som følger.
 Liste over funktioner:
 
 Alle de her bør sige sig selv:
-	get_schedule_student(gymnasiekode, lectio_id, ugekode)
-	get_schedule_class(gymnasiekode, lectio_id, ugekode)
-	get_schedule_teacher(gymnasiekode, laerer_id, ugekode)
+```
+get_schedule_student(gymnasiekode, lectio_id, ugekode)
+get_schedule_class(gymnasiekode, lectio_id, ugekode)
+get_schedule_teacher(gymnasiekode, laerer_id, ugekode)
+```
 
 Denne funktion henter alle skoler som bruger Lectio-platformen.
 	get_schools()
