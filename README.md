@@ -15,23 +15,32 @@ get_schedule_teacher(gymnasiekode, laerer_id, ugekode)
 ```
 
 Denne funktion henter alle skoler som bruger Lectio-platformen.
-	get_schools()
+```
+get_schools()
+```
   
 Denne funktion hiver elever ud fra et givent gymnasie.
-	get_students_from_school(gymsiekode)
+```
+get_students_from_school(gymsiekode)
+```
 
 Denne funktion henter alle hold på et givent gymnasie.
-	get_classes(gymsiekode)
+```
+get_classes(gymsiekode)
+```
 
 Denne funktion henter alle lærerne ud med navn og initialer.
-	get_teachers(gymnasiekode)
+```
+get_teachers(gymnasiekode)
+```
 
 De her funktioner får du nok ikke brug for, de tillader at hente et skema fra en hvilken som helst URL
 man selv konstruerer, samt at hente elever fra en given side hvis man f.eks. kun vil have elever
 hvis navn begynder med B.
-	get_schedule(url til skemaet)
-	get_students_from_page(url til elevsiden)
-
+```
+get_schedule(url til skemaet)
+get_students_from_page(url til elevsiden)
+```
 
 Forklaringer på parametre:
 "Gymnasiekode" er den talkode hvert gymnasie har. Den kan ses i toppen af url'et når man er på en 
