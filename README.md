@@ -2,8 +2,8 @@
 
 Opdateret version af [dette github repository](https://github.com/HSPDev/lectio)
 
-Dette er et simpelt API for Lectio som tillader at hente alle nyttige offentlige data.
-Selve API'et fungerer som følger.
+Dette er et simpelt uofficielt API for Lectio som tillader at hente alle nyttige offentlige data.
+API'et kan kune hente offentligt-tilgængeligt data som elever, lærere, hold og skemaer.
 
 ## Liste over funktioner
 
