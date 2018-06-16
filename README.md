@@ -1,6 +1,6 @@
 # Lectio-API
 
-Updated version of [this repository](https://github.com/HSPDev/lectio)
+Opdateret version af [dette github repository](https://github.com/HSPDev/lectio)
 
 Dette er et simpelt API for Lectio som tillader at hente alle nyttige offentlige data.
 Selve API'et fungerer som følger.
