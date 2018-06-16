@@ -5,7 +5,7 @@ Opdateret version af [dette github repository](https://github.com/HSPDev/lectio)
 Dette er et simpelt API for Lectio som tillader at hente alle nyttige offentlige data.
 Selve API'et fungerer som følger.
 
-Liste over funktioner:
+## Liste over funktioner
 
 Alle de her bør sige sig selv:
 ```php
@@ -34,11 +34,10 @@ get_schedule(url til skemaet)
 get_students_from_page(url til elevsiden)
 ```
 
-Forklaringer på parametre:
+## Forklaringer på parametre
 `gymnasiekode` er den talkode hvert gymnasie har. Den kan ses i toppen af url'et når man er på en 
 vilkårlig side på et gymnasie.
-Feks. her er Nakskov Gymnasiums URL:
-	http://www.lectio.dk/lectio/402/default.aspx
+Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.aspx".
 402 er gymnasiekoden i dette tilfælde.
 
 `lectio_id` referer til det ID som Lectio tilegner hver elev, lærer eller hold. Det er for at adskille fra Elev nummer som
