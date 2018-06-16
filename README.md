@@ -35,12 +35,11 @@ get_students_from_page(url til elevsiden)
 ```
 
 ## Forklaringer på parametre
-`gymnasiekode` er den talkode hvert gymnasie har. Den kan ses i toppen af url'et når man er på en 
+`gymnasiekode` er den talkode hvert gymnasie har. Den kan ses i toppen af URL'et når man er på en 
 vilkårlig side på et gymnasie.
 Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.aspx".
-402 er gymnasiekoden i dette tilfælde.
+`402` er gymnasiekoden i dette tilfælde.
 
-`lectio_id` referer til det ID som Lectio tilegner hver elev, lærer eller hold. Det er for at adskille fra Elev nummer som
-er det tal skolen tildeler hver elev i hver klasse.
+`lectio_id` referer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et eller ved brug af de tre funktioner til at finde elever, lærere og hold.
 
-`ugekode` er ret vigtig. Den skal indsættes som WWYYYY dvs. for uge 7 i år 2018 så er koden 072018
+`ugekode` er ret vigtig. Den skal indsættes som WWYYYY dvs. for uge 7 i år 2018 så er koden `072018`
