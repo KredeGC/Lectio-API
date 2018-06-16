@@ -2,8 +2,7 @@
 
 Updated version of [this repository](https://github.com/HSPDev/lectio)
 
-Dette er et simpelt API for Lectio som tillader at hente alle nyttige offentlige data og på sigt
-også data når man er logget ind (f.eks. beskeder og vedhæftninger samt fravær).
+Dette er et simpelt API for Lectio som tillader at hente alle nyttige offentlige data.
 Selve API'et fungerer som følger.
 
 Liste over funktioner:
