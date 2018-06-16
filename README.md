@@ -8,7 +8,7 @@ Selve API'et fungerer som følger.
 Liste over funktioner:
 
 Alle de her bør sige sig selv:
-```
+```php
 get_schedule_student(gymnasiekode, lectio_id, ugekode)
 get_schedule_class(gymnasiekode, lectio_id, ugekode)
 get_schedule_teacher(gymnasiekode, laerer_id, ugekode)
