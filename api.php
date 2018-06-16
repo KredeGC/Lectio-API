@@ -1,7 +1,5 @@
 <?php
-	$root = $_SERVER['DOCUMENT_ROOT'];
-	
-	include($root.'/lib/simple_html_dom.php');
+	include('simple_html_dom.php');
 	
 	date_default_timezone_set('Europe/Copenhagen');
 	
