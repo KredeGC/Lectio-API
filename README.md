@@ -43,4 +43,4 @@ Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.as
 `lectio_id` referer til det ID som Lectio tilegner hver elev, lærer eller hold. Det er for at adskille fra Elev nummer som
 er det tal skolen tildeler hver elev i hver klasse.
 
-`ugekode` er ret vigtig. Den skal indsættes som WWYYYY dvs. for uge 11 i år 2013 så er koden 112013
+`ugekode` er ret vigtig. Den skal indsættes som WWYYYY dvs. for uge 7 i år 2018 så er koden 072018
