@@ -1,13 +1,19 @@
 # Lectio-API
 
-Opdateret version af [dette github repository](https://github.com/HSPDev/lectio)
+Opdateret version af [dette github repository](https://github.com/HSPDev/lectio), lavet af Henrik Pedersen
+og Daniel Poulsen
 
 Dette er et simpelt, uofficielt API for Lectio som tillader at hente alle nyttige offentlige data.
 API'et kan kune hente offentligt-tilgængeligt data som gymnasier, elever, lærere, hold og skemaer.
 
+API'et, ligesom den tidligere version, bruger Simple HTML Dom og Regular Expressions til at finde brikker og andet information i skemaet på Lectio's mange sider.
+Jeg har ændret det således at den ikke bruger `cURL` men istedet `file_get_contents`.
+
+Dette API er gratis og frit at bruge og lave ændringer til såfremt at Licensen og Copyright bliver overholdt.
+
 ## Liste over funktioner
 
-Alle de her bør sige sig selv:
+Alle de her bør sige sige selv:
 ```php
 get_schedule_student(gymnasiekode, lectio_id, ugekode)
 get_schedule_class(gymnasiekode, lectio_id, ugekode)
@@ -40,6 +46,6 @@ vilkårlig side på et gymnasie.
 Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.aspx".
 `402` er gymnasiekoden i dette tilfælde.
 
-`lectio_id` referer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et eller ved brug af de tre funktioner til at finde elever, lærere og hold.
+`lectio_id` refererer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et eller ved brug af de tre funktioner til at finde elever, lærere og hold.
 
 `ugekode` er ret vigtig. Den skal indsættes som WWYYYY dvs. for uge 7 i år 2018 så er koden `072018`
