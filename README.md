@@ -1,10 +1,10 @@
 # Lectio-API
 
-Opdateret version af [dette github repository](https://github.com/HSPDev/lectio), lavet af Henrik Pedersen
-og Daniel Poulsen
+Opdateret version af [dette github repository](https://github.com/HSPDev/lectio), oprindeligt lavet af Henrik Pedersen
+og Daniel Poulsen, nu vedligeholdt af mig, Krede
 
 Dette er et simpelt, uofficielt API for Lectio som tillader at hente alle nyttige offentlige data.
-API'et kan kune hente offentligt-tilgængeligt data som gymnasier, elever, lærere, hold og skemaer.
+API'et kan kun hente offentligt-tilgængeligt data som gymnasier, elever, lærere, hold og skemaer.
 
 API'et, ligesom den tidligere version, bruger Simple HTML Dom og Regular Expressions til at finde brikker og andet information i skemaet på Lectio's mange sider.
 Jeg har ændret det således at den ikke bruger `cURL` men istedet `file_get_contents`.
