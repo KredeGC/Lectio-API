@@ -13,7 +13,7 @@ Dette API er gratis og frit at bruge og lave ændringer til såfremt at Licensen
 
 ## Liste over funktioner
 
-Alle de her bør sige sige selv:
+Alle de her funktioner bør sige sige selv:
 ```php
 get_schedule_student(gymnasiekode, lectio_id, ugekode)
 get_schedule_class(gymnasiekode, lectio_id, ugekode)
@@ -31,6 +31,7 @@ get_students_from_school(gymsiekode)
 get_classes(gymsiekode)
 get_teachers(gymnasiekode)
 ```
+Jeg vil foreslå at cache resultaterne når man bruger `get_students()` da den skal lade en hjemmeside for hver forbogstav. 
 
 De her funktioner får du nok ikke brug for, de tillader at hente et skema fra en hvilken som helst URL
 man selv konstruerer, samt at hente elever fra en given side hvis man f.eks. kun vil have elever
