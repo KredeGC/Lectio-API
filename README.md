@@ -15,7 +15,8 @@ Dette API er gratis og frit at bruge og lave ændringer til såfremt at Licensen
 ## Eksempel
 
 ```php
-$lectio = new lectio($simple_html_dom_path);
+require('lectio.php');
+$lectio = new lectio('simple_html_dom.php');
 $schools = $lectio->get_schools();
 ```
 
