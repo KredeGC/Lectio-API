@@ -1,4 +1,11 @@
 <?php
+	/*
+	Uofficielt API til Lectio
+	Baseret på simple_html_dom.php
+	Lavet af Henrik Pedersen og Daniel Poulsen
+	Opdateret og vedligeholdt af Krede
+	*/
+	
 	class lectio {
 		const LECTIO_URL = "https://www.lectio.dk/lectio/";
 		
@@ -6,7 +13,9 @@
 			if ($path == null) {
 				$path = 'simple_html_dom.php';
 			}
-			require_once($path);
+			if (is_file($path) && !class_exists('simple_html_dom')) {
+				require_once($path);
+			}
 		}
 		
 		private function get_html($url) {
