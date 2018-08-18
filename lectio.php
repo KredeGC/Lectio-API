@@ -9,10 +9,7 @@
 	class lectio {
 		const LECTIO_URL = "https://www.lectio.dk/lectio/";
 		
-		function __construct($path = null) {
-			if ($path == null) {
-				$path = 'simple_html_dom.php';
-			}
+		function __construct($path = 'simple_html_dom.php') {
 			if (is_file($path) && !class_exists('simple_html_dom')) {
 				require_once($path);
 			}
