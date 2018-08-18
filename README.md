@@ -8,7 +8,9 @@ API'et kan kun hente offentligt-tilgængeligt data som gymnasier, elever, lærer
 Den kan derfor ikke bruges til at måle fravær, tjekke opgaver eller andre private oplysninger
 
 API'et, ligesom den tidligere version, bruger Simple HTML Dom og Regular Expressions til at finde brikker og andet information på Lectio's mange sider.
-Jeg har ændret det således at den ikke bruger `cURL` men istedet `file_get_contents`
+Jeg har ændret det således at den ikke bruger `cURL` men istedet `file_get_contents`.
+
+Denne version er testet på en installation af PHP 7.0. Den virker muligvis på tidligere versioner.
 
 Dette API er gratis og frit at bruge og lave ændringer til såfremt at Licensen og Copyright bliver overholdt.
 
