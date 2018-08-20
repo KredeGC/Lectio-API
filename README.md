@@ -26,9 +26,9 @@ $schools = $lectio->get_schools();
 
 Alle de her funktioner bør sige sige selv:
 ```php
-->get_schedule_student($gymnasie_id, $lectio_id, $ugekode)
-->get_schedule_class($gymnasie_id, $lectio_id, $ugekode)
-->get_schedule_teacher($gymnasie_id, $lectio_id, $ugekode)
+->get_schedule_student($gymnasie_id, $lectio_id, $unixtime)
+->get_schedule_class($gymnasie_id, $lectio_id, $unixtime)
+->get_schedule_teacher($gymnasie_id, $lectio_id, $unixtime)
 ```
 
 Denne funktion henter alle skoler som anvender Lectio-platformen.
@@ -60,4 +60,4 @@ Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.as
 
 `lectio_id` refererer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et eller ved brug af de tre funktioner til at finde elever, lærere og hold.
 
-`ugekode` er ret vigtig. Den skal indsættes som WWYYYY dvs. for uge 7 i år 2018 så er koden `072018`
+`unixtime` er tiden i sekunder siden d. 1 Januar 1970. Idag ville f.eks. være 1534785460 (8-20-2018 19:17:40)
