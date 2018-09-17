@@ -24,19 +24,19 @@ $schools = $lectio->get_schools();
 
 ## Liste over funktioner
 
-Alle de her funktioner henter skemaet for forskellige brugere som et Array.
+Alle de her funktioner henter skemaet for forskellige brugere/hold som et Array.
 ```php
 ->get_schedule_student($gymnasie_id, $lectio_id, $unixtime)
 ->get_schedule_class($gymnasie_id, $lectio_id, $unixtime)
 ->get_schedule_teacher($gymnasie_id, $lectio_id, $unixtime)
 ```
 
-Denne funktion henter alle skoler som anvender Lectio-platformen.
+Denne funktion henter alle skoler som anvender Lectio-platformen. Arrayet har navnet som `key` og dets `gymnasie_id` som `value`.
 ```php
 ->get_schools()
 ```
   
-Disse tre funktioner hiver hhv. elever, hold og lærer ud fra et givent gymnasie.
+Disse tre funktioner hiver hhv. elever, hold og lærer ud fra et givent gymnasie som et Array. Arrayet har personens/holdets navn som `key` og deres `lectio_id` som `value`.
 ```php
 ->get_students($gymsie_id)
 ->get_classes($gymsie_id)
@@ -44,7 +44,7 @@ Disse tre funktioner hiver hhv. elever, hold og lærer ud fra et givent gymnasie
 ```
 Jeg vil foreslå at cache resultaterne når man bruger `get_students()` da den skal loade en ny side for hver forbogstav, hvilket vil sige at det gøres 30 gange for hver gang den bliver kørt
 
-De her funktioner får du nok ikke brug for, de tillader at hente et skema fra en hvilken som helst URL
+De her funktioner får du nok ikke brug for, da de tillader at hente et skema fra en hvilken som helst URL
 man selv konstruerer, samt at hente elever fra en given side hvis man f.eks. kun vil have elever
 hvis navn begynder med B.
 ```php
@@ -60,4 +60,4 @@ Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.as
 
 `lectio_id` refererer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et eller ved brug af de tre funktioner til at finde elever, lærere og hold.
 
-`unixtime` er tiden i sekunder siden d. 1 Januar 1970. Idag ville f.eks. være 1534785460 (8-20-2018 19:17:40)
+`unixtime` er tiden i sekunder siden d. 1 Januar 1970. Idag ville f.eks. være 1534785460 (20-8-2018 19:17:40)
