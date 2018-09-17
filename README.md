@@ -38,8 +38,8 @@ Denne funktion henter alle skoler som anvender Lectio-platformen. Arrayet har na
   
 Disse tre funktioner hiver hhv. elever, hold og lærer ud fra et givent gymnasie som et Array. Arrayet har personens/holdets navn som `key` og deres `lectio_id` som `value`.
 ```php
-->get_students($gymsie_id)
-->get_classes($gymsie_id)
+->get_students($gymnasie_id)
+->get_classes($gymnasie_id)
 ->get_teachers($gymnasie_id)
 ```
 Jeg vil foreslå at cache resultaterne når man bruger `get_students()` da den skal loade en ny side for hver forbogstav, hvilket vil sige at det gøres 30 gange for hver gang den bliver kørt
