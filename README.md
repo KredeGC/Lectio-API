@@ -19,7 +19,8 @@ Dette API er gratis og frit at bruge og lave ændringer til såfremt at Licensen
 ```php
 require('lectio.php');
 $lectio = new lectio('simple_html_dom.php');
-$schools = $lectio->get_schools();
+$schools = $lectio->get_schools(); // Henter alle skoler fra Lectio
+print_r($schools); // Print skolerne og deres gymnasie kode
 ```
 
 ## Liste over funktioner
