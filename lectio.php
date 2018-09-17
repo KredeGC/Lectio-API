@@ -28,7 +28,7 @@
 			$html = file_get_contents($url, false, $context);
 			
 			if ($html == null) {
-				return "404: Error appeared while retrieving html";
+				return "Lectio Error: Couldn't load";
 			}
 			return $html;
 		}
@@ -91,7 +91,7 @@
 			return $students;
 		}
 		
-		public function get_schedule($url) {
+		public function get_schedule($url, $date = null) {
 			$schedule					= array();
 			$schedule['title']			= '';
 			$schedule['week']			= 0;
@@ -240,40 +240,35 @@
 				}
 			}
 			
-			$date = date("j")."\/".date("n");
-			
-			foreach ($schedule['weekdays'] as $day) {
-				if (preg_match("/[a-z]* \(".$date."\)/i", $day)) {
-					$schedule['day'] = $day;
-					$schedule['dayschedule'] = $schedule['schedule'][$day];
+			if ($date != null) {
+				foreach ($schedule['schedule'] as $day => $sched) {
+					if (preg_match("/[a-z]* \(".$date."\)/i", $day)) {
+						$schedule['day'] = $day;
+						$schedule['dayschedule'] = $sched;
+						break;
+					}
 				}
 			}
 			
 			return $schedule;
 		}
 		
-		public function get_schedule_class($id, $lectio_id, $week=null) {
-			$url = 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=stamklasse&klasseid='.$lectio_id;
-			if ($week != null) {
-				$url = $url.'&week='.$week;
-			}
-			return  $this->get_schedule($url);
+		public function get_schedule_class($id, $lectio_id, $t = null) {
+			$time	= isset($t) ? $t : time();
+			$url	= 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=stamklasse&klasseid='.$lectio_id.'&week='.date('WY', $time);
+			return  $this->get_schedule($url, date('j\\\/n', $time));
 		}
 		
-		public function get_schedule_student($id, $lectio_id, $week=null) {
-			$url = 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=elev&elevid='.$lectio_id;
-			if ($week != null) {
-				$url = $url.'&week='.$week;
-			}
-			return  $this->get_schedule($url);
+		public function get_schedule_student($id, $lectio_id, $t = null) {
+			$time	= isset($t) ? $t : time();
+			$url	= 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=elev&elevid='.$lectio_id.'&week='.date('WY', $time);
+			return  $this->get_schedule($url, date('j\\\/n', $time));
 		}
 		
-		public function get_schedule_teacher($id, $lectio_id, $week=null) {
-			$url = 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=laerer&laererid='.$lectio_id;
-			if ($week != null) {
-				$url = $url.'&week='.$week;
-			}
-			return  $this->get_schedule($url);
+		public function get_schedule_teacher($id, $lectio_id, $t = null) {
+			$time	= isset($t) ? $t : time();
+			$url	= 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=laerer&laererid='.$lectio_id.'&week='.date('WY', $time);
+			return  $this->get_schedule($url, date('j\\\/n', $time));
 		}
 	}
 ?>
