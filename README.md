@@ -24,7 +24,7 @@ $schools = $lectio->get_schools();
 
 ## Liste over funktioner
 
-Alle de her funktioner bør sige sige selv:
+Alle de her funktioner henter skemaet for forskellige brugere som et Array.
 ```php
 ->get_schedule_student($gymnasie_id, $lectio_id, $unixtime)
 ->get_schedule_class($gymnasie_id, $lectio_id, $unixtime)
