@@ -102,7 +102,7 @@
 			$schedule['dayschedule']	= array();
 			
 			date_default_timezone_set('Europe/Copenhagen');
-			$finalrex = "(?=Lærere:|Lærer:|Lokale:|Lokaler:|Note:|Lektier:|Øvrigt indhold:|$)";
+			$finalrex = "(?=Aktiviteten har en præsentation.|Lærere:|Lærer:|Lokale:|Lokaler:|Note:|Lektier:|Øvrigt indhold:|$)";
 			
 			$html = $this->get_html($url);
 			$dom = new simple_html_dom();
@@ -125,12 +125,12 @@
 			}
 			
 			$collection = $dom->find('.s2skemabrikcontainer');
-			$schedulebrik = new simple_html_dom(); // Definer den her for genbrugens skyld da den tømmes efter hver iteration
+			$info_container = new simple_html_dom(); // Definer den her for genbrugens skyld da den tømmes efter hver iteration
 			$max = count($schedule['weekdays']);
 			
 			for ($i = 0; $i < $max; $i++) { // Iterer alle noterne i "toppen" af ugedagene
-				$schedulebrik->load($collection[$i]->innertext);
-				$noter = $schedulebrik->find('.s2skemabrikcontent');
+				$info_container->load($collection[$i]->innertext);
+				$noter = $info_container->find('.s2skemabrikcontent');
 				foreach($noter as $note) {
 					$info = trim(html_entity_decode($note->plaintext));
 					$info = preg_replace("/\s+/u", " ", $info);
@@ -138,20 +138,18 @@
 				}
 			}
 			
-			// Vi starter iteratoren count($schedule['weekdays']) + 1 fordi vi vil springe topnoter + et stil element i mellem over
 			for ($i = 0; $i < $max; $i++) {
-				$schedulebrik->load($collection[$i+$max+1]->innertext);
-				// $schedule_fag = $schedulebrik->find('.s2skemabrikcontent'); // Søg efter fag brikkerne. Indeholder alternativ titel
-				$schedule_info = $schedulebrik->find('.s2skemabrik'); // Søg efter alle skemabrikkerne. Indeholder modul information
+				$info_container->load($collection[$i + $max + 1]->innertext); // Skip noter + 1
+				$day_info = $info_container->find('.s2skemabrik'); // Søg efter alle skemabrikkerne. Indeholder modul information
 				$day = $schedule['weekdays'][$i];
 				$lessons = array();
 				
-				for ($y = 0; $y < count($schedule_info); $y++) {
-					$info = trim(html_entity_decode($schedule_info[$y]->getAttribute('data-additionalinfo')));
+				for ($y = 0; $y < count($day_info); $y++) {
+					$info = preg_replace('/\s+/u', ' ', $day_info[$y]->getAttribute('data-additionalinfo'));
 					if (substr($info, 0, 7) == "Aflyst!") continue; // Modulet er aflyst, fjern
-					$info = preg_replace('/\s+/u', ' ', $info);
 					$keyname = 'NA:NA';
-					$changed = false;
+                    $changed = false;
+                    $presentation = false;
 					$time = array();
 					$title = '';
 					$team = '';
@@ -164,6 +162,10 @@
 					if (substr($info, 0, 8) == "Ændret!") { // Status
 						$changed = true;
 						$info = substr($info, 8);
+					}
+					
+					if (preg_match("/Aktiviteten har en præsentation./", $info, $matches)) { // Præsentation
+						$presentation = true;
 					}
 					
 					if (preg_match("/(\d\d:\d\d) til (\d\d:\d\d)/", $info, $matches)) { // Find tid
@@ -221,6 +223,7 @@
 					
 					$lessons[$key] = array(
 						'changed'		=> $changed,
+						'presentation'  => $presentation,
 						'time'			=> $time,
 						'title'			=> $title,
 						'team'			=> $team,
@@ -233,7 +236,7 @@
 					);
 				}
 				
-				ksort( $lessons, SORT_NATURAL ); // Sorter dagene da brikkerne kan være placeret tilfældigt
+				ksort($lessons, SORT_NATURAL); // Sorter dagene da brikkerne kan være placeret tilfældigt
 			
 				foreach ($lessons as $lesson) {
 					$schedule['schedule'][$day]['lessons'][] = $lesson;
@@ -254,18 +257,21 @@
 		}
 		
 		public function get_schedule_class($id, $lectio_id, $t = null) {
+            date_default_timezone_set('Europe/Copenhagen');
 			$time	= isset($t) ? $t : time();
 			$url	= 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=stamklasse&klasseid='.$lectio_id.'&week='.date('WY', $time);
 			return  $this->get_schedule($url, date('j\\\/n', $time));
 		}
 		
 		public function get_schedule_student($id, $lectio_id, $t = null) {
+            date_default_timezone_set('Europe/Copenhagen');
 			$time	= isset($t) ? $t : time();
 			$url	= 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=elev&elevid='.$lectio_id.'&week='.date('WY', $time);
 			return  $this->get_schedule($url, date('j\\\/n', $time));
 		}
 		
 		public function get_schedule_teacher($id, $lectio_id, $t = null) {
+            date_default_timezone_set('Europe/Copenhagen');
 			$time	= isset($t) ? $t : time();
 			$url	= 'https://www.lectio.dk/lectio/'.$id.'/SkemaNy.aspx?type=laerer&laererid='.$lectio_id.'&week='.date('WY', $time);
 			return  $this->get_schedule($url, date('j\\\/n', $time));
