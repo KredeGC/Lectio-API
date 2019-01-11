@@ -42,7 +42,7 @@ Disse funktioner giver alle lokaler og deres tilsvarende id, `get_empty_rooms` v
 ->get_rooms($gymnasie_id)
 ->get_empty_rooms($gymnasie_id, $unixtime)
 ```
-`get_empty_rooms` kan være langsom alt efter hvor mange klasselokaler skolen har. `unixtime` er det tidspunkt hvor funktionen tjekker om lokalet er tomt.
+`get_empty_rooms` kan være meget langsom alt efter hvor mange klasselokaler skolen har da den loader en ny side per lokale. Man kan cache resultatet hvis man har lyst, det ødelægger bare lidt ideen med hurtigt at finde et tomt lokale.
 
 Disse tre funktioner hiver hhv. elever, hold og lærer ud fra et givent gymnasie som et Array. Arrayet har personens/holdets navn som `key` og deres `lectio_id` som `value`.
 ```php
