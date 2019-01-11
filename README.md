@@ -36,7 +36,14 @@ Denne funktion henter alle skoler som anvender Lectio-platformen. Arrayet har na
 ```php
 ->get_schools()
 ```
-  
+
+Disse funktioner er relateret til klasseværelser og giver klasseværelser og deres tilsvarende id. Arrayet har lokalets navn som `key` og dets `id` som `value`.
+```php
+->get_rooms($gymnasie_id)
+->get_empty_rooms($gymnasie_id, $unixtime)
+```
+`get_empty_rooms` kan være langsom alt efter hvor mange klasselokaler skolen har. `unixtime` er det tidspunkt hvor funktionen tjekker om lokalet er tomt.
+
 Disse tre funktioner hiver hhv. elever, hold og lærer ud fra et givent gymnasie som et Array. Arrayet har personens/holdets navn som `key` og deres `lectio_id` som `value`.
 ```php
 ->get_students($gymnasie_id)
@@ -59,6 +66,6 @@ vilkårlig side på et gymnasie.
 Feks. her er Nakskov Gymnasiums URL: "http://www.lectio.dk/lectio/402/default.aspx".
 `402` er gymnasiekoden i dette tilfælde.
 
-`lectio_id` refererer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et eller ved brug af de tre funktioner til at finde elever, lærere og hold.
+`lectio_id` refererer til det ID som Lectio tilegner hver elev, lærer eller hold. Det kan enten findes i toppen af URL'et når man er logget ind eller ved brug af de tre ovenstående funktioner til at finde elever, lærere og hold.
 
 `unixtime` er tiden i sekunder siden d. 1 Januar 1970. Idag ville f.eks. være 1534785460 (20-8-2018 19:17:40)
