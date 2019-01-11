@@ -77,8 +77,8 @@
 		}
 		
 		public function get_students($id) {
-			$url = self::LECTIO_URL.$id.'/FindSkema.aspx?type=elev&forbogstav=';
-			$students = array();
+			$url        = self::LECTIO_URL.$id.'/FindSkema.aspx?type=elev&forbogstav=';
+			$students   = array();
 			$alphabet	= array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 								'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
 								'U', 'V', 'W', 'X', 'Y', 'Z', 'Æ', 'Ø', 'Å', '?');
@@ -89,9 +89,70 @@
 			ksort( $students, SORT_NATURAL ); // Sorter eleverne da de kan været placeret tilfældigt
 			
 			return $students;
-		}
+        }
+        
+        public function get_rooms($id) {
+            $list = $this->get_list(self::LECTIO_URL.$id."/FindSkema.aspx?type=lokale", "/\/lectio\/\d*\/SkemaNy\.aspx\?type=lokale&amp;nosubnav=1&amp;id=(\d*)/");
+            return $list;
+        }
+
+        private function is_room_empty($url, $time) {
+            $html = $this->get_html($url);
+            $dom = new simple_html_dom();
+            $dom->load($html);
+
+            $day = null;
+            $headers = $dom->find('.s2dayHeader td'); // Vi starter iterationer i 1 fordi vi springer den første over (altid tom)
+            $max = count($headers);
+
+			for ($i = 1; $i < $max; $i++) {
+                if (preg_match("/[a-z]* \(".date('j\\\/n', $time)."\)/i", $headers[$i]->plaintext)) {
+                    $day = $i;
+                    break;
+                }
+			}
+            
+            if ($day != null) {
+                $collection = $dom->find('.s2skemabrikcontainer');
+			    $dom->load($collection[$day + $max - 1]->innertext); // Skip noter
+				$day_info = $dom->find('.s2skemabrik'); // Søg efter alle skemabrikkerne. Indeholder modul information
+				
+				for ($i = 0; $i < count($day_info); $i++) {
+					$info = $day_info[$i]->getAttribute('data-additionalinfo');
+					if (substr($info, 0, 7) == "Aflyst!") continue; // Modulet er aflyst, fjern
+					
+					if (preg_match("/(\d\d:\d\d) til (\d\d:\d\d)/", $info, $matches)) {
+                        $start = strtotime($matches[1], $time);
+                        $end = strtotime($matches[2], $time);
+                        if ($time >= $start && $time <= $end) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            
+            return true;
+        }
+
+        public function get_empty_rooms($id, $t = null) { // Kan caches, men ødelægger selve ideen med funktionen
+            date_default_timezone_set('Europe/Copenhagen');
+			$time	= isset($t) ? $t : time();
+            $list   = $this->get_rooms($id);
+            $rooms  = array();
+            $week   = date('WY', $time);
+            foreach ($list as $name => $room) {
+                $url    = self::LECTIO_URL.$id."/SkemaNy.aspx?type=lokale&nosubnav=1&id=".$room."&week=".$week;
+                $empty  = $this->is_room_empty($url, $time);
+                if ($empty) {
+                    $rooms[$name] = $room;
+                }
+            }
+            return $rooms;
+        }
 		
 		public function get_schedule($url, $date = null) {
+            date_default_timezone_set('Europe/Copenhagen');
+            
 			$schedule					= array();
 			$schedule['title']			= '';
 			$schedule['week']			= 0;
@@ -101,7 +162,6 @@
 			$schedule['schedule']		= array();
 			$schedule['dayschedule']	= array();
 			
-			date_default_timezone_set('Europe/Copenhagen');
 			$finalrex = "(?=Aktiviteten har en præsentation.|Lærere:|Lærer:|Lokale:|Lokaler:|Note:|Lektier:|Øvrigt indhold:|$)";
 			
 			$html = $this->get_html($url);
