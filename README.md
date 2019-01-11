@@ -37,7 +37,7 @@ Denne funktion henter alle skoler som anvender Lectio-platformen. Arrayet har na
 ->get_schools()
 ```
 
-Disse funktioner er relateret til klasseværelser og giver klasseværelser og deres tilsvarende id. Arrayet har lokalets navn som `key` og dets `id` som `value`.
+Disse funktioner giver alle lokaler og deres tilsvarende id, `get_empty_rooms` viser kun de lokaler som ikke er i brug. Arrayet har lokalets navn som `key` og dets `id` som `value`.
 ```php
 ->get_rooms($gymnasie_id)
 ->get_empty_rooms($gymnasie_id, $unixtime)
