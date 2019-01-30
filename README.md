@@ -1,5 +1,7 @@
 # Lectio-API
 
+**Lectio har opdateret deres sikkerhed, hvilket resultere i at man ikke længere kan se folks skema hvis man ikke er logget ind, hvilket dette API bygger på. Det resultere i at API'et ikke længere fungere medmindre man på en eller anden måde logger ind.**
+
 Opdateret version af [dette github repository](https://github.com/HSPDev/lectio), oprindeligt lavet af Henrik Pedersen
 og Daniel Poulsen, nu vedligeholdt af mig, Krede
 
